@@ -55,7 +55,14 @@ const Movies = () => {
           );
         })}
       </div>
-      <Pagination count={Math.ceil(data?.data.data.movie_count / 30)} page={Number(page || `1`)} onChange={onHandlePaginate} shape="rounded" color="primary" />
+      <Pagination
+        style={{ display: 'flex', justifyContent: 'center' }}
+        count={Math.ceil(data?.data.data.movie_count / 30)}
+        page={Number(page || `1`)}
+        onChange={onHandlePaginate}
+        shape="rounded"
+        color="primary"
+      />
     </div>
   );
 };
