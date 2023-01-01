@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="con-title">
       <img
-        src="logo_transparent"
+        src="logo_transparent.png"
         alt=""
         onClick={() => {
           navigate('/');
