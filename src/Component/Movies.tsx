@@ -9,16 +9,15 @@ import { getMovies } from '../api/movieApi';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pages = searchParams.get('page');
-  console.log('pages', pages);
+  const page = searchParams.get('page');
+  console.log('pages', page);
 
-  const [page, setPage] = useState(pages ? pages : '1');
+  // const [page, setPage] = useState(pages ? pages : '1');
 
-  console.log('page', page);
   const navigate = useNavigate();
 
   // fetch
-  const { data, isLoading, isError, error } = useQuery(['Movies', page], () => getMovies(page), {
+  const { data, isLoading, isError, error } = useQuery(['Movies', page || `1`], () => getMovies(page || `1`), {
     keepPreviousData: true,
   });
 
@@ -36,7 +35,7 @@ const Movies = () => {
   // 페이지네이션 기능
   const onHandlePaginate = (e: React.ChangeEvent<unknown>, pageNumber: number) => {
     navigate(`/?page=${pageNumber}`);
-    setPage(`${pageNumber}`);
+    // setPage(`${pageNumber}`);
   };
 
   return (
@@ -56,7 +55,7 @@ const Movies = () => {
           );
         })}
       </div>
-      <Pagination count={Math.ceil(data?.data.data.movie_count / 30)} page={Number(page)} onChange={onHandlePaginate} shape="rounded" color="primary" />
+      <Pagination count={Math.ceil(data?.data.data.movie_count / 30)} page={Number(page || `1`)} onChange={onHandlePaginate} shape="rounded" color="primary" />
     </div>
   );
 };
